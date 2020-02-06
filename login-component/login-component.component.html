@@ -1,0 +1,46 @@
+<ion-card class='ion-padding'>
+  <ion-card-header>
+    <ion-card-title><h1>
+      Login details
+    </h1></ion-card-title>
+    <ion-card-subtitle><ion-text color='danger'>
+      This application is in beta phase. The credentials get reseted on logout.
+    </ion-text></ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row>
+      <ion-col size='12' size-sm='6'>
+        <form #authForm='ngForm' (ngSubmit)='authenticateForm(authForm)'>
+          <ion-list lines='none'>
+            <ion-item>
+              <ion-label position='floating'>Username</ion-label>
+              <ion-input type='text'
+              ngModel
+              name='username'
+              #username='ngModel'
+              required
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf='username.touched && username.invalid'>
+              <ion-text color='danger'>Please enter your username</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label position='floating'>Password</ion-label>
+              <ion-input type='password'
+              ngModel
+              name='password'
+              #password='ngModel'
+              required
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf='password.touched && password.invalid'>
+              <ion-text color='danger'>Please enter your password</ion-text>
+            </ion-item>
+          </ion-list>
+          <ion-button type='submit' fill='outline' expand='block' color='dark'
+          [disabled]='!(username.valid && password.valid)'>Login</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

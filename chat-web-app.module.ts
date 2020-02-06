@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ChatWebAppPageRoutingModule } from './chat-web-app-routing.module';
 
 import { ChatWebAppPage } from './chat-web-app.page';
+import { LoginComponentComponent } from './login-component/login-component.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { ChatWebAppPage } from './chat-web-app.page';
     IonicModule,
     ChatWebAppPageRoutingModule
   ],
-  declarations: [ChatWebAppPage]
+  declarations: [
+    ChatWebAppPage,
+    LoginComponentComponent
+  ]
 })
 export class ChatWebAppPageModule {}

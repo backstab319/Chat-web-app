@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
+type NewType = boolean;
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   constructor() { }
-  private isAuthenticated: boolean = false;
+  private isAuthenticated: NewType = false;
 
   getAuthStatus() {
     return this.isAuthenticated;

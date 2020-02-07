@@ -8,6 +8,7 @@ import { ChatWebAppPageRoutingModule } from './chat-web-app-routing.module';
 
 import { ChatWebAppPage } from './chat-web-app.page';
 import { LoginComponentComponent } from './login-component/login-component.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,9 @@ import { LoginComponentComponent } from './login-component/login-component.compo
   ],
   declarations: [
     ChatWebAppPage,
-    LoginComponentComponent
-  ]
+    LoginComponentComponent,
+    SignupComponent
+  ],
+  entryComponents: [SignupComponent]
 })
 export class ChatWebAppPageModule {}

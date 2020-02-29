@@ -4,10 +4,7 @@
       <ion-menu-button></ion-menu-button>
       <ion-back-button defaultHref='/applications'></ion-back-button>
     </ion-buttons>
-    <ion-title>chat-web-app</ion-title>
-    <ion-buttons slot='end'>
-      <ion-button fill='outline' color='primary' (click)='signupModal()'>Sign up</ion-button>
-    </ion-buttons>
+    <ion-title>Chat web app</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,22 +12,50 @@
   <ion-grid>
     <ion-row>
       <ion-col size='12' size-sm='8' offset-sm='2'>
-        <app-login-component (signUp)='initiateSignUp()'></app-login-component>
+        <ion-card class='ion-padding'>
+          <ion-card-header>
+            <ion-card-title class='ion-padding-start'><h1>Welcome to the chat web app</h1></ion-card-title>
+            <ion-card-subtitle class='ion-padding-start'>A simple chat web app that gets the job done.</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list lines='none'>
+              <ion-item>
+                <ion-icon name="checkmark"></ion-icon>
+                <ion-label>Simple to use</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="checkmark"></ion-icon>
+                <ion-label>Features that you would actually use</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="checkmark"></ion-icon>
+                <ion-label>Simple design</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="checkmark"></ion-icon>
+                <ion-label>No shady stuff in the background</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size='12' size-sm='8' offset-sm='2'>
-        <ion-card class='ion-padding'>
+        <ion-card class="ion-padding">
           <ion-card-header>
-            <ion-item lines='none'>
-              <ion-thumbnail slot="start">
-                <ion-img src='https://imgur.com/R3xZcWl.png'></ion-img>
-              </ion-thumbnail>
-              <ion-card-title><h1>Welcome to chat web application</h1></ion-card-title>
-            </ion-item>
-            <ion-card-subtitle>A simple and minimalistic approach to chatting applications with losing any important functionalities</ion-card-subtitle>
+            <ion-card-title class='ion-padding-start'><h1>Start chatting away!</h1></ion-card-title>
+            <ion-card-subtitle class='ion-padding-start'>
+              <ion-text color='danger'>Under beta phase!</ion-text>
+            </ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>This application is in production. We will update you shortly.</ion-card-content>
+          <ion-card-content>
+            <ion-buttons class='ion-padding-start'>
+              <ion-button expand='block' fill='outline' color='primary'
+              (click)='presentUsernameModal()'
+              >Chat</ion-button>
+            </ion-buttons>
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>

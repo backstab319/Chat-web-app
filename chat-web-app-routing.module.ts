@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ChatWebAppPage } from './chat-web-app.page';
-import { AuthGuard } from './auth/auth.guard';
+import { ChatPageGuard } from './chat-page/chat-page.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'chat-page',
     loadChildren: () => import('./chat-page/chat-page.module').then( m => m.ChatPagePageModule),
-    canLoad: [AuthGuard]
+    canLoad: [ChatPageGuard]
   }
 ];
 

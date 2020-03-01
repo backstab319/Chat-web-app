@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { ChatPagePageRoutingModule } from './chat-page-routing.module';
 
 import { ChatPagePage } from './chat-page.page';
+import { HttpClientModule } from '@angular/common/http';
+import { PeopleComponent } from './people/people.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChatPagePageRoutingModule
+    ChatPagePageRoutingModule,
+    HttpClientModule
   ],
-  declarations: [ChatPagePage]
+  declarations: [ChatPagePage, PeopleComponent],
+  entryComponents: [PeopleComponent]
 })
 export class ChatPagePageModule {}

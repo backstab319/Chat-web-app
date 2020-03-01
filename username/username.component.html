@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size='12' size-sm='8' offset-sm='2'>
-        <ion-card>
+        <ion-card class='ion-padding-start'>
           <ion-card-content>
 
             <form #usernameForm=ngForm (ngSubmit)='usernameFormProcessor(usernameForm)'>
@@ -38,6 +38,27 @@
             </form>
 
           </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <ion-card class='ion-padding'>
+          <ion-card-header>
+            <ion-card-title class="ion-padding-start"><h1>
+              What is this?
+            </h1></ion-card-title>
+            <ion-card-subtitle class="ion-padding-start">
+              To start chatting you need to have a username so that others can find you online
+            </ion-card-subtitle>
+            <ion-card-content>
+              <ion-list lines='none'>
+                <ion-item><p>Length of username must be qual to or greater than 4</p></ion-item>
+                <ion-item><p>Can be alphanumeric</p></ion-item>
+                <ion-item><p>For now the usernames are not restricted i.e one could take an already existing username. This will be patched once the app leaves beta phase.</p></ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>

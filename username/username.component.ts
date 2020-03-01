@@ -32,6 +32,7 @@ export class UsernameComponent implements OnInit {
   }
 
   proceedToPage(username: string) {
+    this.us.setUsername(username);
     this.modalCtl.dismiss();
     this.us.setUser();
     this.navCtl.navigateForward('/applications/chat-web-app/chat-page');

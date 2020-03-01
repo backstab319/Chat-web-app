@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, ModalController } from '@ionic/angular';
+import { ToastController, ModalController, PopoverController } from '@ionic/angular';
 import { UsernameService } from './username.service';
 import { ChatService } from './chat.service';
-import { PeopleComponent } from './people/people.component';
+import { OptionsComponent } from './options/options.component';
 
 @Component({
   selector: 'app-chat-page',
@@ -15,7 +15,7 @@ export class ChatPagePage implements OnInit {
     private toastCtl: ToastController,
     private us: UsernameService,
     private chat: ChatService,
-    private modal: ModalController
+    private popCtl: PopoverController
   ) { }
   private username: string;
 
@@ -38,11 +38,13 @@ export class ChatPagePage implements OnInit {
     welcomeToast.present();
   }
 
-  async showPeopleModal() {
-    const peopleModal = await this.modal.create({
-      component: PeopleComponent
+  async showOptions(ev: any) {
+    const options = await this.popCtl.create({
+      component: OptionsComponent,
+      event: ev,
+      translucent: true
     });
-    return await peopleModal.present();
+    return await options.present();
   }
 
 }

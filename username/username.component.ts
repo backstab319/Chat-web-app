@@ -23,6 +23,8 @@ export class UsernameComponent implements OnInit {
   usernameFormProcessor(usernameData: NgForm) {
     if (this.usernameValidator(usernameData.value.username)) {
       this.proceedToPage(usernameData.value.username);
+    } else {
+      return;
     }
     usernameData.resetForm();
   }

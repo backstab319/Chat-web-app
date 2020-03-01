@@ -25,7 +25,7 @@
                   minlength='4'
                   ></ion-input>
                 </ion-item>
-                <ion-item *ngIf='username.invalid'>
+                <ion-item *ngIf='username.invalid && username.touched'>
                   <ion-label><ion-text color='danger'>Please enter a valid username</ion-text></ion-label>
                 </ion-item>
                 <ion-button 

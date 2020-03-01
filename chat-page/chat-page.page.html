@@ -6,14 +6,18 @@
     </ion-buttons>
     <ion-title>Chat</ion-title>
     <ion-buttons slot='end'>
-      <ion-button
+      <!-- <ion-button
       expand='block'
       color='primary'
       fill='outline'
       (click)='showPeopleModal()'>
       <ion-icon name="person" slot='start'></ion-icon>
         People
-      </ion-button>
+      </ion-button> -->
+      <ion-button
+      (click)='showOptions($event)'
+      color='primary'
+      ><ion-icon name="settings" slot='start'></ion-icon>Options</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { ModalController, NavController } from '@ionic/angular';
 import { WriteService } from '../write-page/write.service';
+import { UsernameService } from '../username.service';
 
 @Component({
   selector: 'app-people',
@@ -14,7 +15,8 @@ export class PeopleComponent implements OnInit {
     private chat: ChatService,
     private modal: ModalController,
     private navCtl: NavController,
-    private writeSrv: WriteService
+    private writeSrv: WriteService,
+    private username: UsernameService
   ) { }
   public users: {_id: string, username: string}[];
 
@@ -23,6 +25,10 @@ export class PeopleComponent implements OnInit {
     this.chat.getUsers();
     this.chat.getUpdatedUsers().subscribe(users => {
       this.users = users;
+      const index = this.users.findIndex(x => {
+        return x.username === this.username.getUsername();
+      });
+      this.users.splice(index, 1);
     });
   }
 

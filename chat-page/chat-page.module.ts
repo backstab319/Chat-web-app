@@ -9,6 +9,7 @@ import { ChatPagePageRoutingModule } from './chat-page-routing.module';
 import { ChatPagePage } from './chat-page.page';
 import { HttpClientModule } from '@angular/common/http';
 import { PeopleComponent } from './people/people.component';
+import { OptionsComponent } from './options/options.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { PeopleComponent } from './people/people.component';
     ChatPagePageRoutingModule,
     HttpClientModule
   ],
-  declarations: [ChatPagePage, PeopleComponent],
-  entryComponents: [PeopleComponent]
+  declarations: [ChatPagePage, PeopleComponent, OptionsComponent],
+  entryComponents: [PeopleComponent, OptionsComponent]
 })
 export class ChatPagePageModule {}

@@ -24,10 +24,16 @@ export class WritePagePage implements OnInit {
 
   messageFormProcessor(messageFormData: NgForm) {
     if (this.messageValidator(messageFormData.value.message)) {
+
+      // Fetch Date and time
+      const date = new Date();
+
       this.message = {
         receiverName: this.writeSrv.getReceiverDetails().receiverName,
         senderName: this.usernameSrv.getUsername(),
-        messageBody: messageFormData.value.message
+        messageBody: messageFormData.value.message,
+        messageDate: date.toLocaleDateString(),
+        messageTime: date.toLocaleTimeString()
       };
       this.writeSrv.sendMessage(this.message);
       this.messageSent();

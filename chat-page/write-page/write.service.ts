@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Message } from './message';
 import { HttpClient } from '@angular/common/http';
+import { InboxService } from '../inbox/inbox.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class WriteService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private inboxSrv: InboxService
   ) { }
   private receiverDetails: {
     receiverId: string,
@@ -34,5 +36,6 @@ export class WriteService {
         console.log(val.res);
       });
     // View message subject here to view message as they come i.e refresh inbox when new message is sent
+    this.inboxSrv.getMessages();
   }
 }

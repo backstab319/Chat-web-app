@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot='start'>
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref='/applications/chat-web-app/chat-page'></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inbox</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size='12' size-sm='8' offset-sm='2'>
+        <ion-card class='ion-padding' *ngFor='let i of messages'>
+          <ion-card-header>
+            <ion-card-title class='ion-padding-start'>Sender: {{ i.senderName }}</ion-card-title>
+            <ion-card-subtitle class='ion-padding-start'>Sent on {{i.messageDate}} at {{i.messageTime}} </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p class='ion-padding-start'>{{ i.messageBody }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

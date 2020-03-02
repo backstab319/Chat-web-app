@@ -18,9 +18,16 @@ export class OptionsComponent implements OnInit {
   ngOnInit() {}
 
   gotoPage(pageName: string) {
+    // Show people modal
     if (pageName === 'people') {
       this.popover.dismiss();
       this.showPeopleModal();
+    }
+
+    // Goto inbox page
+    if (pageName === 'inbox') {
+      this.popover.dismiss();
+      this.navCtl.navigateForward('/applications/chat-web-app/chat-page/inbox-page');
     }
   }
 

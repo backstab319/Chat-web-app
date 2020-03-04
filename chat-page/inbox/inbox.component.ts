@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InboxService } from './inbox.service';
 import { Message } from '../write-page/message';
 
@@ -7,12 +7,13 @@ import { Message } from '../write-page/message';
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.scss'],
 })
-export class InboxComponent implements OnInit {
+export class InboxComponent implements OnInit, OnDestroy {
 
   constructor(
     private inboxSrv: InboxService
   ) { }
   public messages: Message[];
+  private inboxServiceRunner;
 
   ngOnInit() {
     // Subscription to update messages automatically
@@ -23,9 +24,15 @@ export class InboxComponent implements OnInit {
         console.log(this.messages);
       });
     // Get new messages if any every 5 seconds
-    setInterval(() => {
+    this.inboxServiceRunner = setInterval(() => {
       this.inboxSrv.getMessages();
     }, 5000);
+  }
+
+  ngOnDestroy() {
+    if (this.inboxServiceRunner) {
+      clearInterval(this.inboxServiceRunner);
+    }
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Username } from './username';
+import { SignUp } from '../sign-up/sign-up';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,40 @@ export class UsernameService {
   ) { }
   private UserSet = false;
   private username: Username = {username: ''};
+  public stat: string;
+  private takenUsernames: string[];
+
+  // Authentication of login data
+  authLoginData(data: SignUp) {
+    // const auth = this.http.post<{message: string, status: string}>('http://localhost:3000/auth/user', data)
+    //   .subscribe(response => {
+    //     if (response.status === 'exist&&passcorrect') {
+    //       this.onCorrectCred(response.message, data.username, response.status);
+    //     } else {
+    //       this.onIncorrectCred(response.message, response.status);
+    //     }
+    //   },
+    //   error => {
+    //     console.log('Error');
+    //   },
+    //   () => {
+    //     console.log(this.stat);
+    //   });
+    // return auth;
+    return this.http.post<{message: string, status: string}>('https://backstab319.herokuapp.com/auth/user', data);
+  }
+
+  onCorrectCred(message: string, username: string, status: string) {
+    this.setUsername(username);
+    console.log(message);
+    this.stat = status;
+    console.log(this.stat);
+  }
+
+  onIncorrectCred(message: string, status: string) {
+    console.log(message);
+    this.stat = status;
+  }
 
   isUserSet() {
     return this.UserSet;
@@ -23,19 +58,26 @@ export class UsernameService {
 
   setUsername(username: string) {
     this.username.username = username;
-    // Push username to database
-    this.pushUsernameToDatabase();
+    this.setUser();
   }
 
   getUsername() {
     return this.username.username;
   }
 
-  // Pushing username to database
-  pushUsernameToDatabase() {
-    this.http.post<{message: string}>('http://localhost:3000/push/username', this.username)
+  // Pushing username and password to the database
+  signUpUser(data: SignUp) {
+    this.pushUsernameToDatabase(data);
+  }
+
+  pushUsernameToDatabase(signUpData: SignUp) {
+    this.http.post<{message: string}>('https://backstab319.herokuapp.com/push/username', signUpData)
       .subscribe(message => {
         console.log(message);
       });
+  }
+
+  getTakenUsernames = () => {
+    return this.http.get('https://backstab319.herokuapp.com/get/users');
   }
 }

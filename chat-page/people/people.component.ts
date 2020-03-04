@@ -18,19 +18,25 @@ export class PeopleComponent implements OnInit {
     private writeSrv: WriteService,
     private username: UsernameService
   ) { }
-  public users: {_id: string, username: string}[];
+  public users: [];
 
   ngOnInit() {
     // Get updated users via subject
     this.chat.getUsers();
     this.chat.getUpdatedUsers().subscribe(users => {
       this.users = users;
-      const index = this.users.findIndex(x => {
-        return x.username === this.username.getUsername();
-      });
-      this.users.splice(index, 1);
+      console.log(this.users);
     });
   }
+
+  // executeOnceFuntion() {
+  //   const index = this.users.findIndex(x => {
+  //     return x.username === this.username.getUsername();
+  //   });
+  //   this.users.splice(index, 1);
+  //   this.executeOnce = false;
+  //   return;
+  // }
 
   closePeopleModal = () => {
     this.modal.dismiss();

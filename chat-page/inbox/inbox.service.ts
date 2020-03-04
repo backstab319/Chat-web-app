@@ -18,7 +18,8 @@ export class InboxService {
 
   // Returns the messages
   getMessages() {
-    this.http.post<{message: Message[], statusCode: string}>('http://localhost:3000/pull/message', {username: this.username.getUsername()})
+    // tslint:disable-next-line: max-line-length
+    this.http.post<{message: Message[], statusCode: string}>('https://backstab319.herokuapp.com/pull/message', {username: this.username.getUsername()})
       .subscribe(res => {
         this.messages = res.message;
         this.updatedMessages.next(this.messages);

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, ToastController, AlertController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { UsernameService } from '../chat-page/username.service';
-import { ChatService } from '../chat-page/chat.service';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
@@ -16,41 +15,62 @@ export class UsernameComponent implements OnInit {
     private modalCtl: ModalController,
     private navCtl: NavController,
     private us: UsernameService,
-    private chatSrv: ChatService
+    private toastCtl: ToastController
   ) { }
   private users: {_id: string, username: string}[];
 
   public usernameExists = false;
+  private authStat = false;
 
-  ngOnInit() {
-    this.chatSrv.getUsers();
-    this.chatSrv.getUpdatedUsers()
-      .subscribe(users => {
-        this.users = users;
-      });
-  }
+  ngOnInit() {}
 
   closeUsernameModal = () => this.modalCtl.dismiss();
 
   usernameFormProcessor(usernameData: NgForm) {
-    // Check if the user already exists
-    if (this.checkValidUsername(usernameData.value.username)) {
-      this.usernameExists = true;
-      usernameData.resetForm();
+    // // Check if the user already exists
+    // if (this.checkValidUsername(usernameData.value.username)) {
+    //   this.usernameExists = true;
+    //   usernameData.resetForm();
+    //   return;
+    // }
+
+    // // Add user and proceed to page
+    // if (this.usernameValidator(usernameData.value.username)) {
+    //   this.proceedToPage(usernameData.value.username);
+    // } else {
+    //   return;
+    // }
+
+    if (usernameData.invalid) {
       return;
     }
 
-    // Add user and proceed to page
-    if (this.usernameValidator(usernameData.value.username)) {
-      this.proceedToPage(usernameData.value.username);
-    } else {
-      return;
-    }
+    const usr = usernameData.value.username;
+    const pass = usernameData.value.password;
+
+    this.us.authLoginData({
+      username: usr,
+      password: pass
+    }).subscribe(response => {
+      if (response.status === 'exist&&passcorrect') {
+        this.us.onCorrectCred(response.message, usr, response.status);
+      } else {
+        this.us.onIncorrectCred(response.message, response.status);
+      }
+    },
+    error => {
+      console.log('There was some error authenticating', error);
+    },
+    () => {
+      // Proceed accordingly
+      if (this.us.stat !== 'exist&&passcorrect') {
+        this.wrongCredToast();
+      } else {
+        this.proceedToPage(usr);
+      }
+    });
+
     usernameData.resetForm();
-  }
-
-  usernameValidator(username: string) {
-    return username.length > 3;
   }
 
   proceedToPage(username: string) {
@@ -58,14 +78,6 @@ export class UsernameComponent implements OnInit {
     this.modalCtl.dismiss();
     this.us.setUser();
     this.navCtl.navigateForward('/applications/chat-web-app/chat-page');
-  }
-
-  checkValidUsername = (username: string) => {
-    const usernames: string[] = [];
-    this.users.map((n) => {
-      usernames.push(n.username);
-    });
-    return usernames.includes(username);
   }
 
   // Signup page segment
@@ -79,6 +91,16 @@ export class UsernameComponent implements OnInit {
       component: SignUpComponent
     });
     return await signUp.present();
+  }
+
+  async wrongCredToast() {
+    const wrongCredToast = await this.toastCtl.create({
+      message: 'Incorrect user credentials. Please check your user name and password and try again',
+      duration: 2000,
+      color: 'danger',
+      translucent: true
+    });
+    wrongCredToast.present();
   }
 
 }

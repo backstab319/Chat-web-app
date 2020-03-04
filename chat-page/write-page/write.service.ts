@@ -31,7 +31,7 @@ export class WriteService {
 
   // Push message to the database
   sendMessage(message: Message) {
-    this.http.post<{res: string}>('http://localhost:3000/push/message', message)
+    this.http.post<{res: string}>('https://backstab319.herokuapp.com/push/message', message)
       .subscribe(val => {
         console.log(val.res);
       });

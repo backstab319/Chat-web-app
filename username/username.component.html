@@ -20,6 +20,7 @@
           <ion-card-content>
 
             <form #usernameForm=ngForm (ngSubmit)='usernameFormProcessor(usernameForm)'>
+
               <ion-list lines='none'>
                 <ion-item>
                   <ion-label position='floating'>Enter your username</ion-label>
@@ -27,16 +28,32 @@
                   ngModel
                   name='username'
                   #username=ngModel
-                  minlength='4'
                   clearInput
+                  required
+                  type='text'
+                  minlength='4'
                   ></ion-input>
                 </ion-item>
                 <ion-item *ngIf='username.invalid && username.touched'>
-                  <ion-label><ion-text color='danger'>Please enter a valid username</ion-text></ion-label>
+                  <ion-label><ion-text color='danger'><p>Please enter a valid username</p></ion-text></ion-label>
                 </ion-item>
-                <ion-item *ngIf='usernameExists && username.untouched'>
-                  <ion-label><ion-text color='danger'>Username already exists!</ion-text></ion-label>
+
+                <ion-item>
+                  <ion-label position='floating'>Enter your password</ion-label>
+                  <ion-input
+                  ngModel
+                  #password='ngModel'
+                  name='password'
+                  clearInput
+                  required
+                  type='password'
+                  minlength='4'
+                  ></ion-input>
                 </ion-item>
+                <ion-item *ngIf='password.invalid && password.touched'>
+                  <ion-label><ion-text color='danger'><p>Please enter your password</p></ion-text></ion-label>
+                </ion-item>
+                
                 <ion-button 
                 type='submit'
                 expand='block'

@@ -27,7 +27,7 @@ export class ChatPagePage implements OnInit {
 
   async welcomeToast() {
     const welcomeToast = await this.toastCtl.create({
-      message: 'Sign up successfull! ' + 'Welcome ' + this.username,
+      message: 'Welcome ' + this.username,
       duration: 2000,
       color: 'primary',
       buttons: [{

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { UsernameService } from './username.service';
+import { ServerService } from '../../server.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,14 @@ export class ChatService {
 
   constructor(
     private http: HttpClient,
-    private userSrv: UsernameService
+    private userSrv: UsernameService,
+    private serverAddress: ServerService
   ) { }
   private usersData: any;
   private updatedUsers = new Subject<[]>();
 
   getUsers() {
-    this.http.post('https://backstab319.herokuapp.com/get/usersandid', {username: this.userSrv.getUsername()})
+    this.http.post(this.serverAddress.getServerAddress() + '/get/usersandid', {username: this.userSrv.getUsername()})
       .subscribe(users => {
         console.log(users);
         this.usersData = users;

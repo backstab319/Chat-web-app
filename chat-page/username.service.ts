@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Username } from './username';
 import { SignUp } from '../sign-up/sign-up';
+import { ServerService } from '../../server.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { SignUp } from '../sign-up/sign-up';
 export class UsernameService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private serverAddress: ServerService
   ) { }
   private UserSet = false;
   private username: Username = {username: ''};
@@ -33,7 +35,7 @@ export class UsernameService {
     //     console.log(this.stat);
     //   });
     // return auth;
-    return this.http.post<{message: string, status: string}>('https://backstab319.herokuapp.com/auth/user', data);
+    return this.http.post<{message: string, status: string}>(this.serverAddress.getServerAddress() + '/auth/user', data);
   }
 
   onCorrectCred(message: string, username: string, status: string) {
@@ -71,13 +73,13 @@ export class UsernameService {
   }
 
   pushUsernameToDatabase(signUpData: SignUp) {
-    this.http.post<{message: string}>('https://backstab319.herokuapp.com/push/username', signUpData)
+    this.http.post<{message: string}>(this.serverAddress.getServerAddress() + '/push/username', signUpData)
       .subscribe(message => {
         console.log(message);
       });
   }
 
   getTakenUsernames = () => {
-    return this.http.get('https://backstab319.herokuapp.com/get/users');
+    return this.http.get(this.serverAddress.getServerAddress() + '/get/users');
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Message } from './message';
 import { HttpClient } from '@angular/common/http';
 import { InboxService } from '../inbox/inbox.service';
+import { ServerService } from 'src/app/applications/server.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class WriteService {
 
   constructor(
     private http: HttpClient,
-    private inboxSrv: InboxService
+    private inboxSrv: InboxService,
+    private serverAddress: ServerService
   ) { }
   private receiverDetails: {
     receiverId: string,
@@ -31,7 +33,7 @@ export class WriteService {
 
   // Push message to the database
   sendMessage(message: Message) {
-    this.http.post<{res: string}>('https://backstab319.herokuapp.com/push/message', message)
+    this.http.post<{res: string}>(this.serverAddress.getServerAddress() + '/push/message', message)
       .subscribe(val => {
         console.log(val.res);
       });

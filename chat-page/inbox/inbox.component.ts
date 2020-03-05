@@ -13,6 +13,7 @@ export class InboxComponent implements OnInit, OnDestroy {
     private inboxSrv: InboxService
   ) { }
   public messages: Message[];
+  public messagesInInbox = true;
   private inboxServiceRunner;
 
   ngOnInit() {
@@ -21,7 +22,9 @@ export class InboxComponent implements OnInit, OnDestroy {
     this.inboxSrv.getUpdatedMessages()
       .subscribe(letter => {
         this.messages = letter;
-        console.log(this.messages);
+        if (letter.length < 1) {
+          this.messagesInInbox = false;
+        }
       });
     // Get new messages if any every 5 seconds
     this.inboxServiceRunner = setInterval(() => {

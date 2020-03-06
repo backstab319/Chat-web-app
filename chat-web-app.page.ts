@@ -20,8 +20,8 @@ export class ChatWebAppPage implements OnInit {
 
   async presentWarning() {
     const warning = await this.alertCtl.create({
-      header: 'Warning!',
-      subHeader: 'This app is in production. Expect bugs!',
+      header: 'Security warning!',
+      subHeader: 'Please do not use any username or password that you are using currently anywhere else',
       buttons: [{
         text: 'Ok',
         role: 'ok'
